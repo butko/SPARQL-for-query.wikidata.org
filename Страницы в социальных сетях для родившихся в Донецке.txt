@@ -1,0 +1,14 @@
+# Запрос на https://query.wikidata.org
+# Страницы в социальных сетях для родившихся в Донецке
+# Сортировка
+SELECT ?human ?humanLabel ?Facebook_profile_ID ?VKontakte_username ?YouTube_channel_ID ?date_of_birth WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,uk,[AUTO_LANGUAGE],en". }
+  ?human wdt:P31 wd:Q5.
+  ?human wdt:P19 wd:Q43070.
+  OPTIONAL { ?human wdt:P569 ?date_of_birth. }
+  OPTIONAL { ?human wdt:P2013 ?Facebook_profile_ID. }
+  OPTIONAL { ?human wdt:P3185 ?VKontakte_username. }
+  OPTIONAL { ?human wdt:P2397 ?YouTube_channel_ID. }
+}
+ORDER BY ?humanLabel
+LIMIT 5000

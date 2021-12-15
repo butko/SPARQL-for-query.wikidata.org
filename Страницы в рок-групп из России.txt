@@ -1,0 +1,18 @@
+# Запрос на https://query.wikidata.org
+# Страницы в рок-групп из России
+
+SELECT ?band ?bandLabel ?YouTube_channel_ID ?Yandex_Music_artist_ID WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,uk,[AUTO_LANGUAGE],en". }
+  ?band wdt:P31 wd:Q215380.
+  # Фильтр по стране
+  ?band wdt:P17 wd:Q159.
+  # Фильтр по жанру
+  ?band wdt:P136 wd:Q11399.
+  
+  # Поля таблицы для вывода
+  OPTIONAL { ?band wdt:P2397 ?YouTube_channel_ID. }
+  OPTIONAL { ?band wdt:P1553 ?Yandex_Music_artist_ID. }
+}
+# Сортировка
+ORDER BY ?bandLabel
+LIMIT 5000

@@ -1,0 +1,13 @@
+# Запрос на https://query.wikidata.org
+# Граждане ДНР в Викиданных
+
+SELECT ?human ?humanLabel ?image ?Commons_category WHERE {
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "ru,uk,[AUTO_LANGUAGE],en". }
+  ?human wdt:P31 wd:Q5.
+  ?human wdt:P27 wd:Q16150196
+  OPTIONAL { ?human wdt:P18 ?image. }
+  OPTIONAL { ?human wdt:P373 ?Commons_category. }
+  OPTIONAL {  }
+}
+ORDER BY ?humanLabel
+LIMIT 5000
